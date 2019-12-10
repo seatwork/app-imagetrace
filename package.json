@@ -1,0 +1,19 @@
+{
+  "name": "Image-Vector",
+  "version": "1.0.0",
+  "description": "Easily convert JPG, PNG, GIF Files to SVG Vector",
+  "author": "AiChen",
+  "copyright": "Copyright (C) 2019, Cloudseat",
+  "license": "MIT",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager . --icon=app/assets/logo.ico --asar --app-version=1.0.0 --overwrite"
+  },
+  "devDependencies": {
+    "electron": "^7.1.4"
+  },
+  "dependencies": {
+    "potrace": "^2.1.2"
+  }
+}

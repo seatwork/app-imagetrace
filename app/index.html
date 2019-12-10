@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./main.css">
+  </head>
+
+  <body>
+    <main>
+      <div class="left"><img/></div>
+      <div class="right"></div>
+    </main>
+
+    <footer>
+      <div class="buttons">
+        <button class="open">OPEN</button>
+        <button class="export" disabled>EXPORT</button>
+      </div>
+
+      <div class="params">
+        <div title="Threshold below which color is considered black. Should be a number in range 0..255 (default: THRESHOLD_AUTO)">
+          Threshold : <input id="threshold" placeholder="AUTO"/>
+        </div>
+
+        <div title="Fill color (default: COLOR_AUTO)">
+          Color : <input id="color" class="color" placeholder="AUTO"/>
+        </div>
+
+        <div title="Background color (default: COLOR_TRANSPARENT)">
+          Background : <input id="background" class="color" placeholder="AUTO"/>
+        </div>
+
+        <div title="How to resolve ambiguities in path decomposition (default: MINORITY)">TurnPolicy :
+          <select id="turnPolicy">
+            <option>BLACK</option><option>WHITE</option><option>LEFT</option>
+            <option>RIGHT</option><option selected>MINORITY</option><option>MAJORITY</option>
+          </select>
+        </div>
+
+        <div title="Suppress speckles of up to this size (default: 2)">
+          TurdSize : <input id="turdSize" value="2"/>
+        </div>
+
+        <div title="Corner threshold parameter (default: 1)">
+          AlphaMax : <input id="alphaMax" value="1"/>
+        </div>
+
+        <div title="Curve optimization (default: TRUE)">OptCurve :
+          <select id="optCurve">
+            <option selected>TRUE</option>
+            <option>FALSE</option>
+          </select>
+        </div>
+
+        <div title="Curve optimization tolerance (default: 0.2)">
+          OptTolerance : <input id="optTolerance" value="0.2"/>
+        </div>
+
+        <div title="Specifies colors by which side from threshold should be turned into vector shape
+(default: TRUE)">BlackOnWhite :
+          <select id="blackOnWhite">
+            <option selected>TRUE</option>
+            <option>FALSE</option>
+          </select>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>

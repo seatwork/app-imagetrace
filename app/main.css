@@ -1,0 +1,149 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Saira';
+  src: url(assets/saira-regular.ttf) format('truetype');
+}
+
+body {
+  margin: 0;
+  color: #333;
+  font-family: 'Saira';
+  font-size: 14px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+}
+
+svg {
+  height: 100%;
+}
+
+input, select {
+  outline: 0;
+  border: 0;
+  padding: 2px 5px;
+  font: inherit;
+  font-weight: 400;
+}
+
+input {
+  width: 50px;
+}
+
+input.color {
+  width: 100px;
+}
+
+button {
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  font: inherit;
+  border-radius: 3px;
+  width: 100px;
+  margin: 5px;
+  padding: 8px;
+  color: #fff;
+  background: #22ac38;
+  opacity: 0.8;
+  transition: all .3s;
+}
+
+button.export {
+  background: #369;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+button:disabled, button:disabled:hover {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* --------------------------------------------------------
+ * Layout
+ * ----------------------------------------------------- */
+
+main {
+  flex: 1;
+  display: flex;
+}
+
+.left, .right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left {
+  border-right: 1px #eee solid;
+}
+
+footer {
+  padding: 10px;
+  background: #eee;
+  display: flex;
+}
+
+footer .buttons {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+footer .params {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+footer .params>div {
+  margin: 5px 10px;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------
+ * Alert Component
+ * ----------------------------------------------------- */
+
+.message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message>div {
+  position: absolute;
+  z-index: 999;
+  top: -100px;
+  color: #fff;
+  background: rgba(238, 77, 55, 0.8);
+  padding: 10px 20px;
+  border-radius: 3px;
+  transition: top .5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.message>div.visible {
+  top: 40px;
+}
