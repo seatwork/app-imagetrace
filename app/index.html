@@ -6,65 +6,75 @@
   </head>
 
   <body>
-    <main>
-      <div class="left"><img/></div>
-      <div class="right"></div>
-    </main>
+    <div class="left"><img/></div>
+    <div class="right"></div>
 
-    <footer>
-      <div class="buttons">
-        <button class="open">OPEN</button>
-        <button class="export" disabled>EXPORT</button>
-      </div>
-
-      <div class="params">
-        <div title="Threshold below which color is considered black. Should be a number in range 0..255 (default: THRESHOLD_AUTO)">
-          Threshold : <input id="threshold" placeholder="AUTO"/>
+    <div class="controls">
+      <div class="options">
+        <div title="设置输出图像的前景色。(默认值: #000000)">
+          Color : <input id="color" class="color" data-value="#000000" value="#000000"/>
         </div>
 
-        <div title="Fill color (default: COLOR_AUTO)">
-          Color : <input id="color" class="color" placeholder="AUTO"/>
+        <div title="设置输出图像的填充颜色，即被“黑色”部分包围的“白色”部分的颜色。(默认值: 透明)">
+          FillColor : <input id="fillcolor" class="color" placeholder="TRANSPARENT"/>
         </div>
 
-        <div title="Background color (default: COLOR_TRANSPARENT)">
-          Background : <input id="background" class="color" placeholder="AUTO"/>
-        </div>
-
-        <div title="How to resolve ambiguities in path decomposition (default: MINORITY)">TurnPolicy :
-          <select id="turnPolicy">
+        <div title="指定如何解决路径分解中的歧义。(默认值: MINORITY)">TurnPolicy :
+          <select id="turnpolicy" data-value="4">
             <option>BLACK</option><option>WHITE</option><option>LEFT</option>
             <option>RIGHT</option><option selected>MINORITY</option><option>MAJORITY</option>
           </select>
         </div>
 
-        <div title="Suppress speckles of up to this size (default: 2)">
-          TurdSize : <input id="turdSize" value="2"/>
+        <div title="设置将图像转换为位图的阈值，介于 0-1 之间。亮度小于该值的像素将转换为黑色，其他所有像素将转换为白色。(默认值: 0.5)">
+          BlackLevel : <input id="blacklevel" data-value="0.5" value="0.5"/>
         </div>
 
-        <div title="Corner threshold parameter (default: 1)">
-          AlphaMax : <input id="alphaMax" value="1"/>
+        <div title="设置拐角阈值参数，值越小产生的锐角越多。如果为 0 则不执行任何平滑操作，并且输出为多边形；如果大于 4/3，将抑制所有角，输出完全平滑。(默认值: 1)">
+          AlphaMax : <input id="alphamax" data-value="1" value="1"/>
         </div>
 
-        <div title="Curve optimization (default: TRUE)">OptCurve :
-          <select id="optCurve">
-            <option selected>TRUE</option>
-            <option>FALSE</option>
+        <div title="抑制不超过此数值的像素斑点。(默认值: 2)">
+          TurdSize : <input id="turdsize" data-value="2" value="2"/>
+        </div>
+
+        <div title="设置输出量化。输出中的坐标四舍五入为 1/unit 像素。默认值通常会产生良好的结果，但对于某些调试模式，值为100可提供更准确的输出。(默认值: 10)">
+          Unit : <input id="unit" data-value="10" value="10"/>
+        </div>
+
+        <div title="设置曲线优化公差。较大的值可使更多连续的贝塞尔曲线段在单个线段中连接在一起，但会降低精度。(默认值: 0.2)">
+          OptTolerance : <input id="opttolerance" data-value="0.2" value="0.2"/>
+        </div>
+
+        <div title="关闭曲线优化。通常，算法会尝试合并相邻的贝塞尔曲线段，禁用后将导致更大的文件大小。(默认值: 否)">LongCurve :
+          <select id="longcurve" data-value="1">
+            <option>TRUE</option>
+            <option selected>FALSE</option>
           </select>
         </div>
 
-        <div title="Curve optimization tolerance (default: 0.2)">
-          OptTolerance : <input id="optTolerance" value="0.2"/>
-        </div>
-
-        <div title="Specifies colors by which side from threshold should be turned into vector shape
-(default: TRUE)">BlackOnWhite :
-          <select id="blackOnWhite">
-            <option selected>TRUE</option>
-            <option>FALSE</option>
+        <div title="不透明地填充图像的白色部分。仅适用封闭在黑色轮廓内的白色部件。(默认值: 否)">Opaque :
+          <select id="opaque" data-value="1">
+            <option>TRUE</option>
+            <option selected>FALSE</option>
           </select>
         </div>
+
+        <div title="位图颜色反转。(默认值: 否)">Invert :
+          <select id="invert" data-value="1">
+            <option>TRUE</option>
+            <option selected>FALSE</option>
+          </select>
+        </div>
+
+        <button class="reset">RESET OPTIONS</button>
       </div>
-    </footer>
+
+      <div class="buttons">
+        <button class="open">OPEN IMAGE</button>
+        <button class="export" disabled>EXPORT SVG</button>
+      </div>
+    </div>
 
     <script src="./renderer.js"></script>
   </body>

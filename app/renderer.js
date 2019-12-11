@@ -7,14 +7,17 @@
  */
 
 const fs = require('fs')
-const potrace = require('potrace')
+const Potrace = require('./potrace')
 const { dialog } = require('electron').remote
 
 const openBtn = $('button.open')
 const exportBtn = $('button.export')
+const resetBtn = $('button.reset')
 const image = $('img')
 const result = $('.right')
-const params = {}
+
+const options = {}
+const potrace = new Potrace()
 
 /* --------------------------------------------------------
  * Button Events
@@ -29,8 +32,9 @@ openBtn.onclick = function() {
     ]
   })
   if (filePaths && filePaths.length == 1) {
-    image.src = image.path = filePaths[0]
-    vectorize(params)
+    image.src = filePaths[0]
+    potrace.loadImage(filePaths[0])
+    resetBtn.onclick()
   }
 }
 
@@ -43,87 +47,56 @@ exportBtn.onclick = function() {
   }
 }
 
+resetBtn.onclick = function() {
+  resetElements()
+  Object.keys(options).forEach(key => delete options[key])
+  vectorize()
+}
+
 /* --------------------------------------------------------
- * Parameter Events
+ * Element Events
  * ----------------------------------------------------- */
 
-$('#turnPolicy').onchange = function() {
-  const value = this.options[this.selectedIndex].value
-  params[this.id] = value.toLowerCase()
-  vectorize(params)
-}
+const form = document.querySelectorAll('input, select')
+form.forEach(element => {
+  let key = element.id, value
 
-$('#optCurve').onchange = $('#blackOnWhite').onchange = function() {
-  const value = this.options[this.selectedIndex].value
-  params[this.id] = value === 'TRUE' ? true : false
-  vectorize(params)
-}
-
-$('#optTolerance').oninput = function() {
-  if (this.value) {
-    if (!isFinite(this.value) || this.value < 0 || this.value > 1) {
-      alert('Must be a number in range 0..1')
-      return
+  if (element.tagName == 'SELECT') {
+    element.onchange = function() {
+      options[key] = this.options[this.selectedIndex].value
+      vectorize()
     }
-    params[this.id] = parseFloat(this.value)
   } else {
-    delete params[this.id]
-  }
-  vectorize(params)
-}
-
-$('#threshold').oninput = function() {
-  if (this.value) {
-    if (!/^\d+$/.test(this.value) || this.value < 0 || this.value > 255) {
-      alert('Must be a number in range 0..255')
-      return
+    element.onblur = function() {
+      options[key] = this.value
+      vectorize()
     }
-    params[this.id] = parseInt(this.value)
-  } else {
-    delete params[this.id]
   }
-  vectorize(params)
-}
+})
 
-$('#turdSize').oninput = $('#alphaMax').oninput = function() {
-  if (this.value) {
-    if (!/^\d+$/.test(this.value)) {
-      alert('Must be an integer value')
-      return
+function resetElements() {
+  form.forEach(element => {
+    let defValue = element.dataset.value
+    if (element.tagName == 'SELECT') {
+      element[defValue].selected = true
+    } else {
+      element.value = defValue || ''
     }
-    params[this.id] = parseInt(this.value)
-  } else {
-    delete params[this.id]
-  }
-  vectorize(params)
-}
-
-$('#color').oninput = $('#background').oninput = function() {
-  if (this.value) {
-    if (!/^#?([0-9A-F]{6}|[0-9A-F]{3})$/i.test(this.value)) {
-      alert('Must be a hex color value')
-      return
-    }
-    params[this.id] = this.value.startsWith('#') ? this.value : '#' + this.value
-  } else {
-    delete params[this.id]
-  }
-  vectorize(params)
+  })
 }
 
 /* --------------------------------------------------------
  * Private Methods
  * ----------------------------------------------------- */
 
-function vectorize(params) {
-  console.log('params:', params)
-  if (!image.path) return
-
-  potrace.trace(image.path, params, function(err, svg) {
+function vectorize() {
+  potrace.toSvg(options, function(err, svg) {
     if (err) {
       alert(err)
       exportBtn.disabled = true
     } else {
+      // remove 'pt' units with width and height
+      svg = svg.replace(/"([\d\.]+)pt"/g, '"$1"')
       result.innerHTML = image.svg = svg
       exportBtn.disabled = false
     }

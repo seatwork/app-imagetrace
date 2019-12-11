@@ -16,7 +16,6 @@ body {
   font-size: 14px;
   height: 100vh;
   display: flex;
-  flex-direction: column;
 }
 
 img {
@@ -26,18 +25,20 @@ img {
 input, select {
   outline: 0;
   border: 0;
-  padding: 2px 5px;
+  padding: 3px 5px;
   margin-left: 5px;
   font: inherit;
   font-weight: 400;
 }
 
 input {
-  width: 50px;
+  width: 75px;
+  text-align: right;
 }
 
 input.color {
   width: 100px;
+  text-align: initial;
 }
 
 button {
@@ -46,17 +47,21 @@ button {
   cursor: pointer;
   font: inherit;
   border-radius: 3px;
-  width: 100px;
-  margin: 5px;
-  padding: 8px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
   color: #fff;
-  background: #22ac38;
+  background: #8895a1;
   opacity: 0.8;
   transition: all .3s;
 }
 
+button.open {
+  background: #22ac38;
+}
+
 button.export {
-  background: #369;
+  background: #e84f34;
 }
 
 button:hover {
@@ -72,13 +77,8 @@ button:disabled, button:disabled:hover {
  * Layout
  * ----------------------------------------------------- */
 
-main {
-  flex: 1;
-  display: flex;
-}
-
 .left, .right {
-  width: 50%;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,30 +88,24 @@ main {
   border-right: 1px #eee solid;
 }
 
-footer {
-  padding: 10px;
+.controls {
+  width: 250px;
+  padding: 20px;
   background: #eee;
   display: flex;
-}
-
-footer .buttons {
-  width: 150px;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
 }
 
-footer .params {
+.controls .options {
   flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
 }
 
-footer .params>div {
-  margin: 5px 10px;
+.controls .options>div {
+  margin: 10px;
   font-weight: 700;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* --------------------------------------------------------

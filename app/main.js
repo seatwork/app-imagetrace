@@ -22,6 +22,8 @@ function createWindow() {
 
   // Create the browser window.
   mainWindow = new electron.BrowserWindow({
+    width: 1024,
+    height: 680,
     icon: path.join(__dirname, 'assets/logo.ico'),
     webPreferences: {
       nodeIntegration: true, // Make sure integrate node in renderer.js
