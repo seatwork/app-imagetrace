@@ -23,14 +23,11 @@ img {
   max-width: 100%;
 }
 
-svg {
-  height: 100%;
-}
-
 input, select {
   outline: 0;
   border: 0;
   padding: 2px 5px;
+  margin-left: 5px;
   font: inherit;
   font-weight: 400;
 }
