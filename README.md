@@ -2,6 +2,8 @@
 
 Imagic is a desktop app for converting image files to SVG vector. It's built on Electron, CLI of Imagemagick convert and Potrace.
 
+![screenshot](https://raw.githubusercontent.com/seatwork/app-imagic/master/screenshot.png)
+
 ## Download
 
 For Windows download from: https://github.com/seatwork/app-imagic/releases
