@@ -124,12 +124,16 @@ module.exports = class {
         throw 'Option "' + key + '" must be a number in range 0..1'
         break
 
+      case 'unit':
+        if (!isFinite(value) || value <= 0)
+        throw 'Option "' + key + '" must be a positive number'
+        break
+
       case 'alphamax':
       case 'turdsize':
-      case 'unit':
       case 'opttolerance':
         if (!isFinite(value) || value < 0)
-        throw 'Option "' + key + '" must be a positive number'
+        throw 'Option "' + key + '" must be greater than 0'
         break
 
       default: break
