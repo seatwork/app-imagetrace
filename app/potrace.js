@@ -42,7 +42,7 @@ module.exports = class {
       this.pixmap = execFileSync(convert, [src, '-alpha', 'Remove', 'pgm:-'],
         { encoding: 'binary', maxBuffer: 1000 * 1024 })
     } catch (e) {
-      const message = e.message.indexOf('ENOBUFS')
+      const message = e.message.indexOf('ENOBUFS') > -1
         ? 'Too large image file' : 'Unsupported image file'
       this.onerror && this.onerror(message)
       this.pixmap = null
@@ -58,7 +58,6 @@ module.exports = class {
 
     try {
       const args = this._parseArgs(options)
-      console.log(args)
       const process = execFile(potrace, ['-', ...args, '-s', '-o', '-'], callback)
       process.stdin.write(this.pixmap, 'binary')
     } catch (err) {
