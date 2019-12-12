@@ -40,7 +40,7 @@ module.exports = class {
     try {
       // Convert image to portable pixmap
       this.pixmap = execFileSync(convert, [src, '-alpha', 'Remove', 'pgm:-'],
-        { encoding: 'binary', maxBuffer: 1000*1024 })
+        { encoding: 'binary', maxBuffer: 1000 * 1024 })
     } catch (e) {
       const message = e.message.indexOf('ENOBUFS')
         ? 'Too large image file' : 'Unsupported image file'
