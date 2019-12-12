@@ -6,9 +6,10 @@
  * --------------------------------------------------------
  */
 
+const electron = require('electron')
 const fs = require('fs')
 const Potrace = require('./potrace')
-const { dialog } = require('electron').remote
+const { dialog } = electron.remote
 
 const openBtn = $('button.open')
 const exportBtn = $('button.export')
@@ -17,6 +18,7 @@ const image = $('img')
 const result = $('.result')
 const imgTag = $('.img-tag')
 const svgTag = $('.svg-tag')
+const footer = $('footer')
 
 const options = {}
 const potrace = new Potrace()
@@ -56,6 +58,10 @@ resetBtn.onclick = function() {
   resetElements()
   Object.keys(options).forEach(key => delete options[key])
   vectorize()
+}
+
+footer.onclick = function() {
+  electron.shell.openExternal('https://github.com/seatwork/app-imagic')
 }
 
 /* --------------------------------------------------------
