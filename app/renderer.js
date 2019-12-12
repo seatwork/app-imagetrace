@@ -66,7 +66,7 @@ footer.onclick = function() {
 }
 
 /* --------------------------------------------------------
- * Element Events
+ * Option Events
  * ----------------------------------------------------- */
 
 const form = document.querySelectorAll('input, select')
@@ -98,8 +98,15 @@ function resetElements() {
 }
 
 /* --------------------------------------------------------
- * Private Methods
+ * Potrace Methods
  * ----------------------------------------------------- */
+
+potrace.onerror = function(err) {
+  alert(err)
+  image.removeAttribute('src')
+  exportBtn.disabled = true
+  result.innerHTML = image.svg = ''
+}
 
 function vectorize() {
   potrace.toSvg(options, function(err, svg) {

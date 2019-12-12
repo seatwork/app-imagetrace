@@ -35,13 +35,14 @@ const imageSign = {
 
 module.exports = class {
 
+  // Convert image to portable pixmap
   loadImage(src) {
-    this.src = src
     try {
-      // Convert image to portable pixmap
+      this.src = src
       this.pixmap = execFileSync(convert, [src, '-alpha', 'Remove', 'pgm:-'], { encoding: 'binary' })
     } catch (e) {
-      alert('Convert to portable image failed')
+      this.onerror && this.onerror('Unsupported image file')
+      this.pixmap = null
     }
   }
 
