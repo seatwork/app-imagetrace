@@ -6,6 +6,7 @@
  * --------------------------------------------------------
  */
 
+require('./tooltip')
 const electron = require('electron')
 const fs = require('fs')
 const Potrace = require('./potrace')
