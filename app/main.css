@@ -200,9 +200,8 @@ footer svg {
 .message {
   position: absolute;
   left: 0;
-  right: 0;
+  right: 250px;
   top: 0;
-  width: 100%;
   height: 0;
   display: flex;
   justify-content: center;
@@ -221,5 +220,5 @@ footer svg {
 }
 
 .message>div.visible {
-  top: 40px;
+  top: 20px;
 }
