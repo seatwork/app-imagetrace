@@ -16,8 +16,9 @@ For Windows download from: https://github.com/seatwork/app-imagic/releases
 
 ## Parameters
 
-* Color - Set the foreground color of the output image. (Default: BLACK)
-  设置输出图像的前景色。(默认值: 黑色)
+* Color
+  - Set the foreground color of the output image. (Default: BLACK)
+  - 设置输出图像的前景色。(默认值: 黑色)
 
 * FillColor - Set the fill color of the output image, i.e., the color of the &"WHITE" parts that are enclosed by "BLACK" parts. (Default: TRANSPARENT) 
 设置输出图像的填充颜色，即被“黑色”部分包围的“白色”部分的颜色。(默认值: 透明)
