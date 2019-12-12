@@ -82,10 +82,32 @@ button:disabled, button:disabled:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .left {
-  border-right: 1px #eee solid;
+  background: url(./assets/bg-left.png)
+}
+
+.right {
+  background: url(./assets/bg-right.png)
+}
+
+.img-tag, .svg-tag {
+  position: absolute;
+  top: 20px;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  opacity: 0.6;
+}
+
+.img-tag {
+  background: #8895a1;
+}
+
+.svg-tag {
+  background: #e96f59;
 }
 
 .controls {

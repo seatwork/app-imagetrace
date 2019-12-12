@@ -14,7 +14,9 @@ const openBtn = $('button.open')
 const exportBtn = $('button.export')
 const resetBtn = $('button.reset')
 const image = $('img')
-const result = $('.right')
+const result = $('.result')
+const imgTag = $('.img-tag')
+const svgTag = $('.svg-tag')
 
 const options = {}
 const potrace = new Potrace()
@@ -27,7 +29,8 @@ openBtn.onclick = function() {
   const filePaths = dialog.showOpenDialogSync({
     properties: ['openFile'],
     filters: [
-      { name: 'Image', extensions: ['png', 'jpg', 'jpeg', 'bmp']},
+      { name: 'Image', extensions:
+      ['png', 'jpg', 'gif', 'bmp', 'tga', 'pcx', 'ico', 'cur', 'iff', 'ani', 'tif', 'tiff']},
       { name: 'All Files', extensions: ['*'] }
     ]
   })
@@ -35,6 +38,8 @@ openBtn.onclick = function() {
     image.src = filePaths[0]
     potrace.loadImage(filePaths[0])
     resetBtn.onclick()
+    imgTag.innerHTML = potrace.getFormat()
+    svgTag.innerHTML = 'SVG'
   }
 }
 
