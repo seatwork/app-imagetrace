@@ -35,13 +35,16 @@ const imageSign = {
 
 module.exports = class {
 
-  // Convert image to portable pixmap
   loadImage(src) {
+    this.src = src
     try {
-      this.src = src
-      this.pixmap = execFileSync(convert, [src, '-alpha', 'Remove', 'pgm:-'], { encoding: 'binary' })
+      // Convert image to portable pixmap
+      this.pixmap = execFileSync(convert, [src, '-alpha', 'Remove', 'pgm:-'],
+        { encoding: 'binary', maxBuffer: 1000*1024 })
     } catch (e) {
-      this.onerror && this.onerror('Unsupported image file')
+      const message = e.message.indexOf('ENOBUFS')
+        ? 'Too large image file' : 'Unsupported image file'
+      this.onerror && this.onerror(message)
       this.pixmap = null
     }
   }
@@ -68,9 +71,9 @@ module.exports = class {
    * Reference: https://github.com/NorgannasAddOns/node-imageinfo
    */
   getFormat() {
-    const data = fs.readFileSync(this.src)
+    const imageData = fs.readFileSync(this.src)
     for (let format in imageSign) {
-      if (this._checkSign(data, 0, imageSign[format])) return format
+      if (this._checkSign(imageData, 0, imageSign[format])) return format
     }
 
     let extname = this.src.substring(this.src.lastIndexOf('.') + 1)
