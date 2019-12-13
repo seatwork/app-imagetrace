@@ -1,20 +1,20 @@
-# Imagic
+# Imagetrace
 
-Imagic is a desktop app for converting image files to SVG vector. It's built on Electron, CLI of Imagemagick convert and Potrace.
+Imagetrace is a desktop app for converting bitmap images to scalable vector graphics (SVG). It's built on Electron, CLI of [Imagemagick convert](http://www.imagemagick.org/script/convert.php) and [Potrace](http://potrace.sourceforge.net/potrace.html).
 
-![screenshot](https://raw.githubusercontent.com/seatwork/app-imagic/master/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/seatwork/app-imagetrace/master/screenshot.png)
 
 ## Download
 
-For Windows download from: https://github.com/seatwork/app-imagic/releases
+https://github.com/seatwork/app-imagetrace/releases
 
 ## Features
 
-- Multi image formats supported
-- Multi vectorize options
-- Convert and export to SVG
-- Graphical User Interface
-- For Windows platform only
+- Multiple image formats supported
+- Multiple vectorization options supported
+- Convert and export to SVG ([2-valued image at the moment](http://potrace.sourceforge.net/faq.html#features))
+- Graphical user interface
+- Only supports windows platform
 
 ## Parameters
 
@@ -43,7 +43,7 @@ For Windows download from: https://github.com/seatwork/app-imagic/releases
   - Set the curve optimization tolerance. Larger values allow more consecutive Bezier curve segments to be joined together in a single segment, at the expense of accuracy. (Default: 0.2) 
   - 设置曲线优化公差。较大的值可使更多连续的贝塞尔曲线段在单个线段中连接在一起，但会降低精度。(默认值: 0.2)
 - **LongCurve**
-  - Turn off curve optimization. Normally IMAGIC tries to join adjacent Bezier curve segments when this is possible. This option disables this behavior, resulting in a larger file size. (Default: FALSE) 
+  - Turn off curve optimization. Normally algorithm tries to join adjacent Bezier curve segments when this is possible. This option disables this behavior, resulting in a larger file size. (Default: FALSE) 
   - 关闭曲线优化。通常，算法会尝试合并相邻的贝塞尔曲线段，禁用后将导致更大的文件大小。(默认值: 否)
 - **Opaque**
   - Fill in the white parts of the image opaquely, instead of leaving them transparent. This only applies to interior white parts, i.e., those that are enclosed inside a black outline. (Default: FALSE) 
@@ -54,8 +54,8 @@ For Windows download from: https://github.com/seatwork/app-imagic/releases
 
 ## building & Running
 ```
-git clone https://github.com/seatwork/app-imagic.git
-cd app-imagic
+git clone https://github.com/seatwork/app-imagetrace.git
+cd app-imagetrace
 npm install
 npm start
 ```
